@@ -1,11 +1,9 @@
 require_relative '../product'
 
 
-puts Product
-
-
 describe Product, "#initialize" do
   it "raises error with no argument" do
+    expect{Product.new}.to(raise_error(ArgumentError))
   end
 
   it "initialize a product with name and value" do
