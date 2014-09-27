@@ -21,11 +21,12 @@ class VendingMachine
     @stock += value
   end
 
-  def select_product(product)
-    if !products.include?(product)
+  def select_product(name)
+    if !@products.map(&:name).include?(name)
       return nil
     end
 
+    product = @products.find {|p| p.name == name}
     if stock < product.value
       return nil
     end
@@ -37,6 +38,20 @@ class VendingMachine
 
   def quit
     puts "thank you."
+  end
+
+  def hoge(input)
+    begin
+      money = Integer(input)
+      add_money(money)
+    rescue
+      select_product(input)
+    end
+  end
+
+  def show_status
+    puts "remain money: " + @stock
+    puts "output: " + output.map(&:name).join(" ")
   end
 
 end
